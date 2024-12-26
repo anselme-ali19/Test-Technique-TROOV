@@ -28,20 +28,31 @@ export class ProductDao {
     
     // update product
     public static async update(id :number, newProduct : IProduct) {
-        const existingProduct = await Product.findOne({name : newProduct.name, type: newProduct.type}).exec()
-        if(existingProduct)  throw new Error('ProductAlreadyExists')
-        return await Product.updateOne({_id : id}, newProduct).exec()
+        const existingProduct = await Product.findById(id).exec()
+        if(!existingProduct) throw new Error('ProductDoentExists')
+        else {
+            const isEqual = (existingProduct.name === newProduct.name &&
+                existingProduct.type === newProduct.type && 
+                existingProduct.price === newProduct.price && 
+                existingProduct.rating === newProduct.rating && 
+                existingProduct.warranty_years === newProduct.warranty_years)
+            if(isEqual)  throw new Error('ProductAlreadyExists')
+            return await Product.updateOne({_id : id}, newProduct).exec()
+        }
     }
 
     // delete product
     public static async delete(id :number) {
+        const existingProduct = await Product.findById(id).exec()
+        if(!existingProduct) throw new Error('ProductDoentExists')
         return await Product.deleteOne({_id : id}).exec()
     } 
 
     // restore or withdraw product
     public static async restoreOrWithDraw(id : number) {
         const existingProduct = await Product.findById(id).exec()
-        const available = !!existingProduct?.available || false
+        if(!existingProduct) throw new Error('ProductDoentExists')
+        const available : boolean = existingProduct.available
         return await Product.updateOne({_id : id}, {'available' : !available}).exec()
     }
 }
