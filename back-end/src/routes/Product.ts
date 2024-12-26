@@ -12,8 +12,8 @@ router.get('/', async (req: Request, res : Response) => {
         const limit = Number(req.query.limit)
         const result = await ProductDao.getProducts({limit:limit})
         return   res.status(OK).json(result) 
-    } catch(err) {
-        return res.status(BAD_REQUEST).json(err) as any
+    } catch(err : any) {
+        return res.status(BAD_REQUEST).json({error :err.message}) as any
     }
 })
 
@@ -25,8 +25,8 @@ router.post('/', async (req: Request, res : Response) => {
         console.log('ProductrBody :', req.body)
         const result = await ProductDao.create(req.body)
         return   res.status(OK).json(result) as any
-    } catch(err) {
-        return res.status(BAD_REQUEST).json(err) 
+    } catch(err :any) {
+        return res.status(BAD_REQUEST).json({error :err.message}) 
     }
 })
 
@@ -43,8 +43,8 @@ router.put('/:id', async (req: Request, res : Response) => {
         }
         const result = await ProductDao.update(Number(id),req.body)
         return   res.status(OK).json(result) as any
-    } catch(err) {
-        return res.status(BAD_REQUEST).json(err) 
+    } catch(err : any) {
+        return res.status(BAD_REQUEST).json({error :err.message}) 
     }
 })
 
@@ -61,8 +61,8 @@ router.put('/:id/restore', async (req: Request, res : Response) => {
         }
         const result = await ProductDao.restoreOrWithDraw(Number(id))
         return   res.status(OK).json(result) as any
-    } catch(err) {
-        return res.status(BAD_REQUEST).json(err) 
+    } catch(err :any) {
+        return res.status(BAD_REQUEST).json({error :err.message}) 
     }
 })
 /******************************************************************************
@@ -79,8 +79,8 @@ router.delete('/:id', async (req: Request, res : Response) => {
         const result = await ProductDao.delete(Number(id))
         console.log('product :',result)
         return   res.status(OK).json(result) as any
-    } catch(err) {
-        return res.status(BAD_REQUEST).json(err) 
+    } catch(err :any) {
+        return res.status(BAD_REQUEST).json({error :err.message}) 
     }
 })
 export default router

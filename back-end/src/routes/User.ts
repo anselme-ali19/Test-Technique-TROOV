@@ -9,11 +9,10 @@ const router = Router()
  ******************************************************************************/
 router.post('/', async (req: Request, res : Response) => {
     try {
-        console.log('UserBody :', req.body)
         const result = await UserDao.create(req.body)
         return   res.status(OK).json(result) as any
     } catch(err :any) {
-        return res.status(BAD_REQUEST).json(err) 
+        return res.status(BAD_REQUEST).json({error :err.message}) 
     }
 })
 
@@ -22,12 +21,10 @@ router.post('/', async (req: Request, res : Response) => {
  ******************************************************************************/
 router.get('/', async (req: Request, res : Response) => {
     try {
-        console.log('Userquery :', req.body)
         const result = await UserDao.login(req.body)
         return   res.status(OK).json(result) as any
     } catch(err :any) {
-        console.error('error :',err?.name)
-        return res.status(BAD_REQUEST).json(err) 
+        return res.status(BAD_REQUEST).json({error :err.message}) 
     }
 })
 
