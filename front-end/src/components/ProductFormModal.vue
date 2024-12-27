@@ -1,7 +1,7 @@
 <template>
     <v-dialog v-model="dialogOpen" persistent max-width="500px">
       <v-card>
-        <v-card-title>{{ isEditing ? 'Modifier un produit' : 'Ajouter un produit' }}</v-card-title>
+        <v-card-title><strong> {{ isEditing ? 'Modifier un produit' : 'Ajouter un produit' }} </strong></v-card-title>
         <v-divider></v-divider>
         <v-card-text>
           <v-form v-model="formValid">

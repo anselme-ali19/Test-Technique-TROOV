@@ -8,11 +8,17 @@
       />
   
       <v-container>
-        <CustumTitle />
+        <v-row justify="end">
+          <v-btn color="red" dark @click="logout">
+            <v-icon left> {{ mdiLogout }} </v-icon>
+               Log Out
+          </v-btn>
+        </v-row>
+        <CustumTitle title="Gestion des Produits" />
         <v-row justify="end">
           <v-btn color="primary" @click="openAddModal">Ajouter Produit</v-btn>
         </v-row>
-  
+
         <ProductTable
           :products="products"
           @edit="openEditModal"
@@ -52,7 +58,8 @@
     deleteProduct,
     recoverProduct,
   } from '../services/apiProductService'
-  
+  import { mdiLogout } from '@mdi/js';
+  const router = useRouter()
   const products = ref<any[]>([]);
   const isModalOpen = ref(false);
   const isConfirmOpen = ref(false);
@@ -164,6 +171,9 @@
 
   const submitProductFormHandler = computed(() => editingProduct.value ? handleEditProduct : handleAddProduct)
   
+  // logout
+  const logout = () => router.push({path:'/'})
+
   onMounted( async () => {
     await fetchProducts();
   });

@@ -1,7 +1,7 @@
 <template>
     <v-dialog v-model="dialogOpen" persistent   max-width="500px">
       <v-card>
-        <v-card-title class="headline">{{ title }}</v-card-title>
+        <v-card-title class="headline"><strong> {{ title }} </strong></v-card-title>
         <v-divider></v-divider>
         <v-card-text>{{ message }}</v-card-text>
         <v-divider></v-divider>
