@@ -50,13 +50,13 @@
                             ></v-text-field>
                     </v-form>
                     <v-btn
-                    class="mb-8"
-                    color="blue"
-                    size="large"
-                    variant="tonal"
-                    block
-                    :disabled="!formValid"
-                    @click="loginOrSingInOrResetPassword"
+                        class="mb-8"
+                        color="blue"
+                        size="large"
+                        variant="tonal"
+                        block
+                        :disabled="!formValid"
+                        @click="loginOrSingInOrResetPassword"
                     >
                         {{ action  }}
                     </v-btn>
@@ -98,7 +98,6 @@ import CustumTitle from './CustumTitle.vue';
         if (forgottenPassword.value) return 'Password Reset'
         else if(props.type === 'logIn') return 'Connexion'
         else return 'Inscription'
-
     })
     const action = computed(() => {
         if(forgottenPassword.value) return 'Reset Password'

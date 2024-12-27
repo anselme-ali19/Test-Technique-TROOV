@@ -1,4 +1,3 @@
-import { triggerAsyncId } from 'async_hooks'
 import User from '../../entities/User'
 import bcrypt  from 'bcryptjs'
 interface IUser {

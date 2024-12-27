@@ -18,8 +18,8 @@
       },
     },
     "include": [
-      "src/**/*.ts"
-, "seedProduct.ts"    ],
+      "src/**/*.ts",
+      "seedProduct.ts"],
     "ts-node": {
     "esm": true,
   }

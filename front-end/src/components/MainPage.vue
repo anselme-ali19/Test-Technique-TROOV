@@ -6,14 +6,13 @@
         :message="alert.message"
         @close="alert.message = ''"
       />
-  
-      <v-container>
-        <v-row justify="end">
+      <v-row justify="end" style="position: fixed; top: 20px; right: 20px">
           <v-btn color="red" dark @click="logout">
             <v-icon left> {{ mdiLogout }} </v-icon>
                Log Out
           </v-btn>
         </v-row>
+      <v-container>
         <CustumTitle title="Gestion des Produits" />
         <v-row justify="end">
           <v-btn color="primary" @click="openAddModal">Ajouter Produit</v-btn>
