@@ -21,11 +21,31 @@ router.post('/', async (req: Request, res : Response) => {
  ******************************************************************************/
 router.get('/', async (req: Request, res : Response) => {
     try {
-        const result = await UserDao.login(req.body)
+        const user =  {email: req.query.email as string, password: req.query.password as string}
+        const result = await UserDao.login(user)
         return   res.status(OK).json(result) as any
     } catch(err :any) {
         return res.status(BAD_REQUEST).json({error :err.message}) 
     }
 })
 
+/******************************************************************************
+ *              PUT reset user password - "PUT /api/users/:email"
+ ******************************************************************************/
+
+router.put('/:email', async (req: Request, res : Response) => {
+    try {
+        const {email} = req.params
+        const {password} = req.body
+        if(!email) {
+            return res.status(BAD_REQUEST).json({
+                error: 'EmailRequired'
+            })
+        }
+        const result = await UserDao.resetPassword(email,password)
+        return   res.status(OK).json(result) as any
+    } catch(err : any) {
+        return res.status(BAD_REQUEST).json({error :err.message}) 
+    }
+})
 export default router

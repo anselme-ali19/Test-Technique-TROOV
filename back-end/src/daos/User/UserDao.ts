@@ -1,3 +1,4 @@
+import { triggerAsyncId } from 'async_hooks'
 import User from '../../entities/User'
 import bcrypt  from 'bcryptjs'
 interface IUser {
@@ -16,8 +17,8 @@ export class UserDao {
         }
         // Encryption of the string password
         const newUser = user
-        var salt = bcrypt.genSaltSync(10);
-        var hash = bcrypt.hashSync(user.password, salt);
+        const salt = bcrypt.genSaltSync(10);
+        const hash = bcrypt.hashSync(user.password, salt);
         newUser.password=hash
         return await (new User(newUser)).save()
     }
@@ -33,5 +34,18 @@ export class UserDao {
             throw new Error('BadPassword')
         }
         return await existingUser
+    }
+
+    // reset user password
+    public static async resetPassword (email : string, password : string) {
+        const existingUser  = await User.findOne({email : email}).exec() 
+        if(!existingUser) {
+            throw new Error(`UserDontExist--${email}`)
+        } 
+
+        const salt = bcrypt.genSaltSync(10);
+        const hash = bcrypt.hashSync(password, salt);
+        existingUser.password = hash
+        return await existingUser.save()
     }
 }

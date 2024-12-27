@@ -13,8 +13,6 @@
   </template>
   
   <script setup lang="ts">
-    const y = ref('top')
-    const timer = ref(3000)
     const props = defineProps<{
         message: string;
         type: 'success' | 'error';

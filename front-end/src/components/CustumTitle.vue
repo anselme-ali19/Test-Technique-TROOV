@@ -2,10 +2,12 @@
     <v-container
       class="text-center mt-2 mb-4"
     >
-    <h1 class="title-style">Gestion des Produits</h1>
+    <h1 class="title-style">{{ title }}</h1>
     </v-container>
   </template>
-  
+  <script setup lang="ts">
+    const props = defineProps<{title : string}>()
+  </script>
   <style scoped>
   .title-style {
     font-weight: bold;
