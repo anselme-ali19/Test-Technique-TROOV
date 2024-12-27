@@ -1,4 +1,3 @@
-import { omitUndefined } from 'mongoose'
 import Product from '../../entities/Product'
 
 interface IProduct {
@@ -33,9 +32,9 @@ export class ProductDao {
         else {
             const isEqual = (existingProduct.name === newProduct.name &&
                 existingProduct.type === newProduct.type && 
-                existingProduct.price === newProduct.price && 
-                existingProduct.rating === newProduct.rating && 
-                existingProduct.warranty_years === newProduct.warranty_years)
+                existingProduct.price === Number(newProduct.price) && 
+                existingProduct.rating === Number(newProduct.rating) && 
+                existingProduct.warranty_years === Number(newProduct.warranty_years))
             if(isEqual)  throw new Error('ProductAlreadyExists')
             return await Product.updateOne({_id : id}, newProduct).exec()
         }

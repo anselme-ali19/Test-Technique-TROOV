@@ -22,7 +22,7 @@
               class="mb-3"
             ></v-text-field>
             <v-text-field
-              label="Prix"
+              label="Prix ($)"
               v-model="myForm.price"
               :rules="[rules.required, rules.numeric]"
               outlined
@@ -40,7 +40,7 @@
             <v-text-field
               label="Garantie (années)"
               v-model="myForm.warranty_years"
-              :rules="[rules.required, rules.numeric]"
+              :rules="[rules.required, rules.integer]"
               outlined
               dense
               class="mb-3"

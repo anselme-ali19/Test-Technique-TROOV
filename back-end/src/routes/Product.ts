@@ -22,7 +22,6 @@ router.get('/', async (req: Request, res : Response) => {
  ******************************************************************************/
 router.post('/', async (req: Request, res : Response) => {
     try {
-        console.log('ProductrBody :', req.body)
         const result = await ProductDao.create(req.body)
         return   res.status(OK).json(result) as any
     } catch(err :any) {
@@ -77,7 +76,6 @@ router.delete('/:id', async (req: Request, res : Response) => {
             })
         }
         const result = await ProductDao.delete(Number(id))
-        console.log('product :',result)
         return   res.status(OK).json(result) as any
     } catch(err :any) {
         return res.status(BAD_REQUEST).json({error :err.message}) 
